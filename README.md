@@ -28,6 +28,9 @@ import CheckBox from 'react-native-checkbox';
 - `labelBefore` : position the label before the checkbox (boolean). The default
 value is false
 - `labelStyle` : style object that will be applied to the label
+- `linkLabel` :  Label text if the checkbox has a link like terms
+- `linkAddress` : Link label link URL
+- `linkStyle` : Style for linked text
 - `checked` : initial checked value
 - `checkedImage`: checked image (e.g.: require('PATH_TO_IMAGE'))
 - `checkboxStyle` : style object that will be applied to the
