@@ -7,6 +7,8 @@ import {
     Image,
     Text,
     View,
+    TouchableNativeFeedback,
+    Linking,
     TouchableHighlight
 } from 'react-native';
 
@@ -52,7 +54,9 @@ class CheckBox extends Component {
                 style={this.props.checkboxStyle || styles.checkbox}
                 source={source}/>
                 <View style={styles.labelContainer}>
-                    <Text style={[styles.label, this.props.labelStyle]}>{this.props.label}</Text>
+                    <Text style={[styles.label, this.props.labelStyle]}>
+                        {this.props.label}
+                    </Text>
                 </View>
             </View>
         );
@@ -75,6 +79,18 @@ class CheckBox extends Component {
                          accessibilityLabel={this.props.accessibilityLabel + 'Label'}
                          testID={this.props.testID + 'Label'}>
                           <Text numberOfLines={this.props.labelLines} style={[styles.label, this.props.labelStyle]}>{this.props.label}</Text>
+                        {
+                            this.props.linkAddress && 
+                            <TouchableNativeFeedback
+                                onPress={() => {
+                                    Linking.openURL(this.props.linkAddress);
+                                }}
+                            >
+                                <Text style={[styles.label, this.props.labelStyle, this.props.linkStyle]}>
+                                    {this.props.linkLabel}
+                                </Text>
+                            </TouchableNativeFeedback>
+                        }
                       </View>
                     ) : <View></View>) }
                     <Image
@@ -100,6 +116,18 @@ class CheckBox extends Component {
                       accessibilityLabel={this.props.accessibilityLabel + 'Label'}
                       testID={this.props.testID + 'Label'}>
                         <Text numberOfLines={this.props.labelLines} style={[styles.label, this.props.labelStyle]}>{this.props.label}</Text>
+                        {
+                            this.props.linkAddress && 
+                            <TouchableNativeFeedback
+                                onPress={() => {
+                                    Linking.openURL(this.props.linkAddress);
+                                }}
+                            >
+                                <Text style={[styles.label, this.props.labelStyle, this.props.linkStyle]}>
+                                    {this.props.linkLabel}
+                                </Text>
+                            </TouchableNativeFeedback>
+                        }
                     </View>
                     ) : <View></View>) }
                 </View>
@@ -120,13 +148,21 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 5,
     },
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
     checkbox: {
         width: 26,
         height: 26
     },
     labelContainer: {
+        flexDirection: 'row',
         marginLeft: 10,
         marginRight: 10,
+        alignItems:'center',
+        justifyContent:'center',
     },
     label: {
         fontSize: 15,
@@ -141,6 +177,9 @@ CheckBox.propTypes = {
     label: PropTypes.string,
     labelBefore: PropTypes.bool,
     labelStyle: PropTypes.oneOfType([PropTypes.array,PropTypes.object,PropTypes.number]),
+    linkAddress: PropTypes.string,
+    linkLabel: PropTypes.string,
+    linkStyle: PropTypes.oneOfType([PropTypes.array,PropTypes.object,PropTypes.number]),
     labelLines: PropTypes.number,
     checkboxStyle: PropTypes.oneOfType([PropTypes.array,PropTypes.object,PropTypes.number]),
     containerStyle: PropTypes.oneOfType([PropTypes.array,PropTypes.object,PropTypes.number]),
